@@ -23,7 +23,7 @@
                     data: {"original_url" : $("#url").val()},
                     dataType: 'json',
                     success: function(response, status){
-                        if(response.message =="URL expired"){
+                        if(response.message =="URL not found or expired"){
                             response.original_url = ""
                             console.log("short URL for the link got expired")
                         }else if(response.message == "Link already exists on table"){
