@@ -22,9 +22,8 @@ class ShortenUrl < ApplicationRecord
     end
 
     def set_expiration_date
-        byebug
-        self.expire_on = Time.now()
-        # self.expire_on =  Date.today + 30.days
+        # self.expire_on = Time.now()
+        self.expire_on =  Date.today + 30.days
         self.number_of_clicks = 0
     end
 
