@@ -1,0 +1,22 @@
+<html>
+    <body>
+            <table>                         
+                <% @all.each do |data| %>      
+                <tr>
+                   <td>Original URL:<%= data.original_url%></td>  
+                </tr>
+                <tr>
+                    <td>Shortened URL:<%= data.shortened_url %></td>  
+                </tr>
+                <tr>
+                    <td>Number Of Clicks on Shortened URL:<%= data.number_of_clicks %></td>  
+                </tr>
+                <tr>
+                    <td>--------------------------------------------------</td>  
+                </tr>
+                <% end %>                        
+            </table> 
+    </body>
+</html>
+
+

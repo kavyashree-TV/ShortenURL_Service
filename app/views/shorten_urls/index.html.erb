@@ -1,0 +1,52 @@
+<html>
+    <body>
+        <center>
+            <form>
+                <h1>Welcome to short.com</h1>
+                <div>Please enter your URL here</div>
+                <input type = "text", value = "", name = "original_url", id="url", placeholder="Original URL"> 
+                <input type='button' onclick="submitFrmAjax();" value="Shorten URL">
+                <div id="short_url"></div>
+                
+                
+                
+       
+        </center>
+
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script>
+            function submitFrmAjax(){
+                var tmp = null;
+            $.ajax({
+                    type: "post",
+                    url : "/shortened_urls/create",
+                    data: {"original_url" : $("#url").val()},
+                    dataType: 'json',
+                    success: function(response, status){
+                        if(response.message =="URL expired"){
+                            response.original_url = ""
+                            console.log("short URL for the link got expired")
+                        }else if(response.message == "Link already exists on table"){
+                            console.log("Link is already on db")
+                        }else{
+                        }
+                         $('#short_url').append(`
+                        <div> Here is your short URL!:<a href=\"${response.original_url}">${response.shortened_url}</a> </div>
+                        `).click(handler)
+                    },
+                });
+            }
+            function handler(){
+                $.ajax({
+                    type: "post",
+                    url : "/shortened_urls/analytics",
+                    data: {"short_url" : $(this).text()},
+                    dataType: 'json',
+                    success: function(response, status){
+                    },
+                });
+            }
+        </script>
+    </body>
+</html>
+
